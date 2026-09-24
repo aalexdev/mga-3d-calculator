@@ -144,7 +144,8 @@
       values: {
         printerPower: 120,
         fixedCosts: 5,
-        filamentPrice: 80,
+        filamentPrice: 100,
+        profitMargin: 150,
       },
     },
   ];
