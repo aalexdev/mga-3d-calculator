@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calculadora de Precificação de Peças 3D</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <button id="presetsToggle" class="presets-toggle" type="button" aria-label="Abrir predefinições" aria-expanded="false" aria-controls="presetsPanel">
+    <svg class="presets-toggle-icon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <line x1="4" y1="6" x2="20" y2="6"></line>
+      <line x1="4" y1="12" x2="20" y2="12"></line>
+      <line x1="4" y1="18" x2="20" y2="18"></line>
+      <circle cx="9" cy="6" r="2"></circle>
+      <circle cx="16" cy="12" r="2"></circle>
+      <circle cx="10" cy="18" r="2"></circle>
+    </svg>
+    <span class="presets-toggle-text">Predefinições</span>
+  </button>
+
+  <div id="presetsOverlay" class="presets-overlay"></div>
+
+  <aside id="presetsPanel" class="presets-panel" aria-hidden="true">
+    <div class="presets-panel-header">
+      <h2 id="presetsPanelTitle">Predefinições</h2>
+      <button id="presetsClose" class="presets-close" type="button" aria-label="Fechar predefinições">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+          <line x1="5" y1="5" x2="19" y2="19"></line>
+          <line x1="19" y1="5" x2="5" y2="19"></line>
+        </svg>
+      </button>
+    </div>
+
+    <div id="presetsListView" class="presets-view">
+      <p class="presets-panel-hint">Aplique valores rápidos e ajuste à vontade depois &mdash; nenhum campo fica bloqueado.</p>
+      <div class="presets-list" id="presetsList"></div>
+      <button id="presetAddBtn" class="preset-add-btn" type="button">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+          <line x1="12" y1="5" x2="12" y2="19"></line>
+          <line x1="5" y1="12" x2="19" y2="12"></line>
+        </svg>
+        Adicionar predefinição
+      </button>
+    </div>
+
+    <form id="presetForm" class="presets-view preset-form" novalidate hidden>
+      <button type="button" id="presetFormBack" class="preset-form-back">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="19" y1="12" x2="5" y2="12"></line>
+          <polyline points="12 19 5 12 12 5"></polyline>
+        </svg>
+        Voltar
+      </button>
+
+      <div class="field">
+        <label for="presetName">Nome da predefinição</label>
+        <input type="text" id="presetName" placeholder="Ex: PLA Premium" required>
+      </div>
+
+      <p class="presets-panel-hint">Preencha apenas os campos que essa predefinição deve preencher automaticamente. Deixe o resto em branco.</p>
+
+      <div class="preset-form-fields">
+        <div class="field">
+          <label for="presetField-filamentPrice">Preço do filamento por kg (R$)</label>
+          <input type="number" id="presetField-filamentPrice" min="0" step="0.01" placeholder="0,00">
+        </div>
+        <div class="field">
+          <label for="presetField-filamentUsed">Filamento usado na peça (g)</label>
+          <input type="number" id="presetField-filamentUsed" min="0" step="0.1" placeholder="0">
+        </div>
+        <div class="field">
+          <label for="presetField-printerPower">Potência da impressora (W)</label>
+          <input type="number" id="presetField-printerPower" min="0" step="1" placeholder="0">
+        </div>
+        <div class="field field-time">
+          <label>Tempo de impressão</label>
+          <div class="time-inputs">
+            <div class="time-input">
+              <input type="number" id="presetField-printHours" min="0" step="1" placeholder="0">
+              <span class="time-unit">h</span>
+            </div>
+            <div class="time-input">
+              <input type="number" id="presetField-printMinutes" min="0" max="59" step="1" placeholder="0">
+              <span class="time-unit">min</span>
+            </div>
+          </div>
+        </div>
+        <div class="field">
+          <label for="presetField-kwhPrice">Preço do kWh (R$)</label>
+          <input type="number" id="presetField-kwhPrice" min="0" step="0.01" placeholder="0,00">
+        </div>
+        <div class="field">
+          <label for="presetField-fixedCosts">Custos fixos / adicionais (R$)</label>
+          <input type="number" id="presetField-fixedCosts" min="0" step="0.01" placeholder="0,00">
+        </div>
+        <div class="field">
+          <label for="presetField-laborCost">Mão de obra (R$)</label>
+          <input type="number" id="presetField-laborCost" min="0" step="0.01" placeholder="0,00">
+        </div>
+        <div class="field">
+          <label for="presetField-profitMargin">Margem de lucro (%)</label>
+          <input type="number" id="presetField-profitMargin" min="0" step="1" placeholder="0">
+        </div>
+      </div>
+
+      <div class="preset-form-actions">
+        <button type="submit" class="preset-save-btn">Salvar predefinição</button>
+        <button type="button" id="presetDeleteBtn" class="preset-delete-btn" hidden>Excluir</button>
+      </div>
+    </form>
+  </aside>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <div class="app">
+    <header class="app-header">
+      <h1>Calculadora de Precificação 3D</h1>
+      <p class="subtitle">Calcule o custo e o preço de venda ideal para suas impressões 3D</p>
+    </header>
+
+    <main class="layout">
+      <section class="form-column">
+
+        <div class="card">
+          <h2 class="card-title">
+            <svg class="card-icon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="9"></circle>
+              <circle cx="12" cy="12" r="3"></circle>
+            </svg>
+            Filamento
+          </h2>
+          <div class="field-grid">
+            <div class="field">
+              <label for="filamentPrice">Preço do filamento por kg (R$)</label>
+              <input type="number" id="filamentPrice" min="0" step="0.01" placeholder="0,00">
+            </div>
+            <div class="field">
+              <label for="filamentUsed">Filamento usado na peça (g)</label>
+              <input type="number" id="filamentUsed" min="0" step="0.1" placeholder="0">
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h2 class="card-title">
+            <svg class="card-icon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+              <polygon points="13 2 4.5 14 11 14 10 22 19.5 9.5 13 9.5 13 2"></polygon>
+            </svg>
+            Consumo de Energia
+          </h2>
+          <div class="field-grid field-grid-3">
+            <div class="field">
+              <label for="printerPower">Potência da impressora (W)</label>
+              <input type="number" id="printerPower" min="0" step="1" placeholder="0">
+            </div>
+            <div class="field field-time">
+              <label>Tempo de impressão</label>
+              <div class="time-inputs">
+                <div class="time-input">
+                  <input type="number" id="printHours" min="0" step="1" placeholder="0">
+                  <span class="time-unit">h</span>
+                </div>
+                <div class="time-input">
+                  <input type="number" id="printMinutes" min="0" max="59" step="1" placeholder="0">
+                  <span class="time-unit">min</span>
+                </div>
+              </div>
+            </div>
+            <div class="field">
+              <label for="kwhPrice">Preço do kWh (R$)</label>
+              <input type="number" id="kwhPrice" min="0" step="0.01" placeholder="0,00">
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h2 class="card-title">
+            <svg class="card-icon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M3 7a2 2 0 0 1 2-2h13a1 1 0 0 1 1 1v3"></path>
+              <path d="M3 7v11a2 2 0 0 0 2 2h15a1 1 0 0 0 1-1v-8a1 1 0 0 0-1-1H8a2 2 0 0 0 0 4h11"></path>
+            </svg>
+            Custos Fixos, Mão de Obra e Lucro
+          </h2>
+          <div class="field-grid field-grid-3">
+            <div class="field">
+              <label for="fixedCosts">Custos fixos / adicionais (R$)</label>
+              <input type="number" id="fixedCosts" min="0" step="0.01" placeholder="0,00">
+            </div>
+            <div class="field">
+              <label for="laborCost">Mão de obra (R$)</label>
+              <input type="number" id="laborCost" min="0" step="0.01" placeholder="0,00">
+            </div>
+            <div class="field">
+              <label for="profitMargin">Margem de lucro (%)</label>
+              <input type="number" id="profitMargin" min="0" step="1" placeholder="0">
+            </div>
+          </div>
+        </div>
+
+      </section>
+
+      <section class="results-column">
+        <div class="card highlight-card">
+          <h2 class="card-title">Resultados</h2>
+          <div class="highlight-grid">
+            <div class="highlight-item">
+              <span class="highlight-label">Custo Total de Produção</span>
+              <span class="highlight-value" id="totalCost">R$ 0,00</span>
+            </div>
+            <div class="highlight-item highlight-item-main">
+              <span class="highlight-label">Preço de Venda Sugerido</span>
+              <span class="highlight-value highlight-value-main" id="salePrice">R$ 0,00</span>
+            </div>
+            <div class="highlight-item">
+              <span class="highlight-label">Lucro Líquido</span>
+              <span class="highlight-value" id="netProfit">R$ 0,00</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h2 class="card-title">Estatísticas e Detalhamento</h2>
+
+          <div class="breakdown">
+            <div class="breakdown-row">
+              <div class="breakdown-label">
+                <span class="dot dot-filament"></span>
+                Filamento
+              </div>
+              <div class="breakdown-bar">
+                <div class="breakdown-bar-fill fill-filament" id="barFilament" style="width: 0%"></div>
+              </div>
+              <div class="breakdown-values">
+                <span id="pctFilament">0%</span>
+                <span class="breakdown-money" id="costFilament">R$ 0,00</span>
+              </div>
+            </div>
+
+            <div class="breakdown-row">
+              <div class="breakdown-label">
+                <span class="dot dot-energy"></span>
+                Energia
+              </div>
+              <div class="breakdown-bar">
+                <div class="breakdown-bar-fill fill-energy" id="barEnergy" style="width: 0%"></div>
+              </div>
+              <div class="breakdown-values">
+                <span id="pctEnergy">0%</span>
+                <span class="breakdown-money" id="costEnergy">R$ 0,00</span>
+              </div>
+            </div>
+
+            <div class="breakdown-row">
+              <div class="breakdown-label">
+                <span class="dot dot-fixed"></span>
+                Custos Fixos
+              </div>
+              <div class="breakdown-bar">
+                <div class="breakdown-bar-fill fill-fixed" id="barFixed" style="width: 0%"></div>
+              </div>
+              <div class="breakdown-values">
+                <span id="pctFixed">0%</span>
+                <span class="breakdown-money" id="costFixed">R$ 0,00</span>
+              </div>
+            </div>
+
+            <div class="breakdown-row">
+              <div class="breakdown-label">
+                <span class="dot dot-labor"></span>
+                Mão de Obra
+              </div>
+              <div class="breakdown-bar">
+                <div class="breakdown-bar-fill fill-labor" id="barLabor" style="width: 0%"></div>
+              </div>
+              <div class="breakdown-values">
+                <span id="pctLabor">0%</span>
+                <span class="breakdown-money" id="costLabor">R$ 0,00</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="stats-footer">
+            <div class="stat-chip">
+              <span class="stat-chip-label">Consumo de energia</span>
+              <span class="stat-chip-value" id="energyKwh">0 kWh</span>
+            </div>
+            <div class="stat-chip">
+              <span class="stat-chip-label">Tempo total</span>
+              <span class="stat-chip-value" id="timeDecimal">0h</span>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="app-footer">
+      <p>Calculadora de Precificação 3D &mdash; valores atualizados em tempo real</p>
+    </footer>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
