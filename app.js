@@ -143,7 +143,7 @@
       name: 'MGA',
       values: {
         printerPower: 120,
-        fixedCosts: 5,
+        fixedCosts: 5.5,
         filamentPrice: 100,
         profitMargin: 150,
       },
