@@ -36,3 +36,6 @@ mga-3d-calculator/
 ├── index.html   # Estrutura principal da página
 ├── styles.css   # Estilização visual minimalista
 └── app.js       # Lógica e cálculos em JavaScript
+```
+
+Desenvolvido por [Aalex Dev](https://github.com/aalexdev)
