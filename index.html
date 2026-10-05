@@ -4,24 +4,24 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Calculadora de Precificação de Peças 3D</title>
-  <link rel="icon" type="image/jpeg" href="favicon3d.jpg">
+  <link rel="icon" type="image/jpeg" href="favicon3d.jpg"> 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="styles.css"> 
 </head>
 <body>
   <button id="presetsToggle" class="presets-toggle" type="button" aria-label="Abrir predefinições" aria-expanded="false" aria-controls="presetsPanel">
     <svg class="presets-toggle-icon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
       <line x1="4" y1="6" x2="20" y2="6"></line>
-      <line x1="4" y1="12" x2="20" y2="12"></line>
+      <line x1="4" y1="12" x2="20" y2="12"></line> 
       <line x1="4" y1="18" x2="20" y2="18"></line>
       <circle cx="9" cy="6" r="2"></circle>
       <circle cx="16" cy="12" r="2"></circle>
-      <circle cx="10" cy="18" r="2"></circle>
+      <circle cx="10" cy="18" r="2"></circle> 
     </svg>
     <span class="presets-toggle-text">Predefinições</span>
-  </button>
+  </button> 
 
   <div id="presetsOverlay" class="presets-overlay"></div>
 
@@ -40,9 +40,9 @@
       <p class="presets-panel-hint">Aplique valores rápidos e ajuste à vontade depois &mdash; nenhum campo fica bloqueado.</p>
       <div class="presets-list" id="presetsList"></div>
       <button id="presetAddBtn" class="preset-add-btn" type="button">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
-          <line x1="12" y1="5" x2="12" y2="19"></line>
-          <line x1="5" y1="12" x2="19" y2="12"></line>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"> 
+          <line x1="12" y1="5" x2="12" y2="19"></line> 
+          <line x1="5" y1="12" x2="19" y2="12"></line> 
         </svg>
         Adicionar predefinição
       </button>
@@ -68,20 +68,20 @@
         <div class="field">
           <label for="presetField-filamentPrice">Preço do filamento por kg (R$)</label>
           <input type="number" id="presetField-filamentPrice" min="0" step="0.01" placeholder="0,00">
-        </div>
+        </div> 
         <div class="field">
           <label for="presetField-filamentUsed">Filamento usado na peça (g)</label>
-          <input type="number" id="presetField-filamentUsed" min="0" step="0.1" placeholder="0">
+          <input type="number" id="presetField-filamentUsed" min="0" step="0.1" placeholder="0"> 
         </div>
         <div class="field">
-          <label for="presetField-printerPower">Potência da impressora (W)</label>
+          <label for="presetField-printerPower">Potência da impressora (W)</label> 
           <input type="number" id="presetField-printerPower" min="0" step="1" placeholder="0">
         </div>
-        <div class="field field-time">
+        <div class="field field-time"> 
           <label>Tempo de impressão</label>
           <div class="time-inputs">
             <div class="time-input">
-              <input type="number" id="presetField-printHours" min="0" step="1" placeholder="0">
+              <input type="number" id="presetField-printHours" min="0" step="1" placeholder="0"> 
               <span class="time-unit">h</span>
             </div>
             <div class="time-input">
