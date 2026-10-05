@@ -102,26 +102,26 @@
           <label for="presetField-laborCost">Mão de obra (R$)</label>
           <input type="number" id="presetField-laborCost" min="0" step="0.01" placeholder="0,00">
         </div>
-        <div class="field">
+        <div class="field"> 
           <label for="presetField-profitMargin">Margem de lucro (%)</label>
           <input type="number" id="presetField-profitMargin" min="0" step="1" placeholder="0">
         </div>
       </div>
 
-      <div class="preset-form-actions">
+      <div class="preset-form-actions"> 
         <button type="submit" class="preset-save-btn">Salvar predefinição</button>
         <button type="button" id="presetDeleteBtn" class="preset-delete-btn" hidden>Excluir</button>
       </div>
     </form>
-  </aside>
+  </aside> 
 
   <div id="toast" class="toast" role="status" aria-live="polite"></div>
-
+ 
   <div class="app">
     <header class="app-header">
-      <h1>Calculadora de Precificação 3D</h1>
+      <h1>Calculadora de Precificação 3D</h1> 
       <p class="subtitle">Calcule o custo e o preço de venda ideal para suas impressões 3D</p>
-    </header>
+    </header> 
 
     <main class="layout">
       <section class="form-column">
@@ -130,19 +130,19 @@
           <h2 class="card-title">
             <svg class="card-icon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
               <circle cx="12" cy="12" r="9"></circle>
-              <circle cx="12" cy="12" r="3"></circle>
-            </svg>
-            Filamento
-          </h2>
+              <circle cx="12" cy="12" r="3"></circle>  
+            </svg> 
+            Filamento 
+          </h2> 
           <div class="field-grid">
             <div class="field">
-              <label for="filamentPrice">Preço do filamento por kg (R$)</label>
+              <label for="filamentPrice">Preço do filamento por kg (R$)</label> 
               <input type="number" id="filamentPrice" min="0" step="0.01" placeholder="0,00">
-            </div>
+            </div> 
             <div class="field">
               <label for="filamentUsed">Filamento usado na peça (g)</label>
               <input type="number" id="filamentUsed" min="0" step="0.1" placeholder="0">
-            </div>
+            </div> 
           </div>
         </div>
 
@@ -178,11 +178,11 @@
           </div>
         </div>
 
-        <div class="card">
+        <div class="card"> 
           <h2 class="card-title">
-            <svg class="card-icon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <svg class="card-icon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"> 
               <path d="M3 7a2 2 0 0 1 2-2h13a1 1 0 0 1 1 1v3"></path>
-              <path d="M3 7v11a2 2 0 0 0 2 2h15a1 1 0 0 0 1-1v-8a1 1 0 0 0-1-1H8a2 2 0 0 0 0 4h11"></path>
+              <path d="M3 7v11a2 2 0 0 0 2 2h15a1 1 0 0 0 1-1v-8a1 1 0 0 0-1-1H8a2 2 0 0 0 0 4h11"></path> 
             </svg>
             Custos Fixos, Mão de Obra e Lucro
           </h2>
@@ -193,11 +193,11 @@
             </div>
             <div class="field">
               <label for="laborCost">Mão de obra (R$)</label>
-              <input type="number" id="laborCost" min="0" step="0.01" placeholder="0,00">
+              <input type="number" id="laborCost" min="0" step="0.01" placeholder="0,00"> 
             </div>
-            <div class="field">
+            <div class="field"> 
               <label for="profitMargin">Margem de lucro (%)</label>
-              <input type="number" id="profitMargin" min="0" step="1" placeholder="0">
+              <input type="number" id="profitMargin" min="0" step="1" placeholder="0"> 
             </div>
           </div>
         </div>
@@ -209,14 +209,14 @@
           <h2 class="card-title">Resultados</h2>
           <div class="highlight-grid">
             <div class="highlight-item">
-              <span class="highlight-label">Custo Total de Produção</span>
-              <span class="highlight-value" id="totalCost">R$ 0,00</span>
+              <span class="highlight-label">Custo Total de Produção</span> 
+              <span class="highlight-value" id="totalCost">R$ 0,00</span> 
             </div>
-            <div class="highlight-item highlight-item-main">
-              <span class="highlight-label">Preço de Venda Sugerido</span>
-              <span class="highlight-value highlight-value-main" id="salePrice">R$ 0,00</span>
+            <div class="highlight-item highlight-item-main"> 
+              <span class="highlight-label">Preço de Venda Sugerido</span>  
+              <span class="highlight-value highlight-value-main" id="salePrice">R$ 0,00</span> 
             </div>
-            <div class="highlight-item">
+            <div class="highlight-item"> 
               <span class="highlight-label">Lucro Líquido</span>
               <span class="highlight-value" id="netProfit">R$ 0,00</span>
             </div>
@@ -233,11 +233,11 @@
                 Filamento
               </div>
               <div class="breakdown-bar">
-                <div class="breakdown-bar-fill fill-filament" id="barFilament" style="width: 0%"></div>
+                <div class="breakdown-bar-fill fill-filament" id="barFilament" style="width: 0%"></div> 
               </div>
-              <div class="breakdown-values">
-                <span id="pctFilament">0%</span>
-                <span class="breakdown-money" id="costFilament">R$ 0,00</span>
+              <div class="breakdown-values"> 
+                <span id="pctFilament">0%</span> 
+                <span class="breakdown-money" id="costFilament">R$ 0,00</span> 
               </div>
             </div>
 
@@ -247,34 +247,34 @@
                 Energia
               </div>
               <div class="breakdown-bar">
-                <div class="breakdown-bar-fill fill-energy" id="barEnergy" style="width: 0%"></div>
-              </div>
+                <div class="breakdown-bar-fill fill-energy" id="barEnergy" style="width: 0%"></div> 
+              </div> 
               <div class="breakdown-values">
                 <span id="pctEnergy">0%</span>
-                <span class="breakdown-money" id="costEnergy">R$ 0,00</span>
+                <span class="breakdown-money" id="costEnergy">R$ 0,00</span> 
               </div>
             </div>
 
             <div class="breakdown-row">
-              <div class="breakdown-label">
+              <div class="breakdown-label"> 
                 <span class="dot dot-fixed"></span>
-                Custos Fixos
+                Custos Fixos 
               </div>
               <div class="breakdown-bar">
                 <div class="breakdown-bar-fill fill-fixed" id="barFixed" style="width: 0%"></div>
-              </div>
+              </div> 
               <div class="breakdown-values">
                 <span id="pctFixed">0%</span>
                 <span class="breakdown-money" id="costFixed">R$ 0,00</span>
               </div>
             </div>
 
-            <div class="breakdown-row">
+            <div class="breakdown-row"> 
               <div class="breakdown-label">
                 <span class="dot dot-labor"></span>
                 Mão de Obra
               </div>
-              <div class="breakdown-bar">
+              <div class="breakdown-bar"> 
                 <div class="breakdown-bar-fill fill-labor" id="barLabor" style="width: 0%"></div>
               </div>
               <div class="breakdown-values">
@@ -284,13 +284,13 @@
             </div>
           </div>
 
-          <div class="stats-footer">
-            <div class="stat-chip">
+          <div class="stats-footer"> 
+            <div class="stat-chip"> 
               <span class="stat-chip-label">Consumo de energia</span>
-              <span class="stat-chip-value" id="energyKwh">0 kWh</span>
+              <span class="stat-chip-value" id="energyKwh">0 kWh</span> 
             </div>
             <div class="stat-chip">
-              <span class="stat-chip-label">Tempo total</span>
+              <span class="stat-chip-label">Tempo total</span> 
               <span class="stat-chip-value" id="timeDecimal">0h</span>
             </div>
           </div>
